@@ -2,7 +2,7 @@ import telebot
 import sqlite3
 
 # Устанавливаем соединение с базой данных в виде пула соединений
-conn = sqlite3.connect('db/main.db', check_same_thread=False)
+conn = sqlite3.connect('app/db/main.db', check_same_thread=False)
 cursor = conn.cursor()
 
 # Создаем таблицу, если она не существует
