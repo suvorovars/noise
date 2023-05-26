@@ -4,7 +4,7 @@ from flask import Flask, jsonify, render_template
 import sqlite3
 
 app = Flask(__name__)
-database_path = os.path.join(app.root_path, 'db/main.db')  # Замените 'your_database.db' на фактическое имя файла базы данных
+database_path = os.path.join(app.root_path, 'db/main.db')
 @app.route('/')
 def home():
     print("Home page")

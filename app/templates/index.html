@@ -4,13 +4,26 @@
     <title>Flask App</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css">
+    <!-- Include Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
     <div class="container mt-5">
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success animate__animated animate__fadeInDown" role="alert">
             <h4 class="alert-heading">Flask App is Running!</h4>
-            <p>The application is up and running. You can generate the JSON file by visiting the <a href="/generate_json">/generate_json</a> endpoint.</p>
+            <p>The application is up and running.</p>
         </div>
+        <button class="btn btn-primary mt-3 animate__animated animate__bounceIn" onclick="downloadDatabase()">Download Database</button>
     </div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Animate.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.js"></script>
+    <script>
+        function downloadDatabase() {
+            window.location.href = '/generate_json';
+        }
+    </script>
 </body>
 </html>
