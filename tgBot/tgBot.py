@@ -243,7 +243,7 @@ def ask_noise_control_measures(message):
     conn.commit()
 
     bot.reply_to(message, "Спасибо за участие в опросе! Ваши ответы были записаны.", reply_markup=types.ReplyKeyboardRemove())
-    bot.sendMessage(message, "Также вы можете замерить уровень шумого загрязнения, для этого введите /noise")
+    bot.send_message(message, "Также вы можете замерить уровень шумого загрязнения, для этого введите /noise")
 
 def noise_metering(message):
     chat_id = message.chat.id
