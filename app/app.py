@@ -1,7 +1,9 @@
 import os
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 import sqlite3
+
+from app.query import generate_filter_query
 
 app = Flask(__name__)
 database_path = os.path.join(app.root_path, 'db/main.db')
@@ -17,8 +19,23 @@ def generate_json():
     conn = sqlite3.connect(database_path)  # Replace 'your_database.db' with your actual database file name
     cursor = conn.cursor()
 
-    # Retrieve data from the 'survey' table
-    cursor.execute("SELECT * FROM survey")
+    filters = {}
+    filters['age'] = request.args.get('age')
+    filters['age_comparison'] = request.args.get('age_comparison')
+    filters['place'] = request.args.get('place')
+    filters['mainNoise'] = request.args.get('main_noise')
+    filters['frequency'] = request.args.get('frequency')
+    filters['frequency_comparison'] = request.args.get('frequency_comparison')
+    filters['noise_rating'] = request.args.get('noise_rating')
+    filters['noise_impact_rating'] = request.args.get('noise_impact_rating')
+    filters['illness_from_noise'] = request.args.get('illness')
+    filters['sleep_problem'] = request.args.get('sleep_problem')
+    filters['noise_control_measures'] = request.args.get('noise_control')
+
+    query, values = generate_filter_query(filters)
+
+    cursor.execute(query, tuple(values))
+
     rows = cursor.fetchall()
 
     # Prepare the data as a list of dictionaries
