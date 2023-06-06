@@ -24,7 +24,7 @@ def generate_json():
     filters['age_comparison'] = request.args.get('age_comparison')
     filters['place'] = request.args.get('place')
     filters['mainNoise'] = request.args.get('main_noise')
-    filters['frequency'] = request.args.get('frequency')
+    filters['frequency_in_noisy_place'] = request.args.get('frequency')
     filters['frequency_comparison'] = request.args.get('frequency_comparison')
     filters['noise_rating'] = request.args.get('noise_rating')
     filters['noise_impact_rating'] = request.args.get('noise_impact_rating')
@@ -32,7 +32,7 @@ def generate_json():
     filters['sleep_problem'] = request.args.get('sleep_problem')
     filters['noise_control_measures'] = request.args.get('noise_control')
 
-    query, values = generate_filter_query(filters)
+    query, values, key_sort = generate_filter_query(filters)
 
     cursor.execute(query, tuple(values))
 

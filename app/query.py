@@ -2,6 +2,7 @@
 def generate_filter_query(filters):
     query = "SELECT * FROM survey WHERE 1"
     values = []
+    sort_key = ''
 
     for key, value in filters.items():
         if key == 'age':
@@ -16,8 +17,8 @@ def generate_filter_query(filters):
                 else:
                     query += " AND age = ?"
                 values.append(value)
-        elif key == 'frequency':
-            if filters['frequency'] is None:
+        elif key == 'frequency_in_noisy_place':
+            if filters['frequency_in_noisy_place'] is None:
                 pass
             else:
                 frequency_comparison = filters.get('frequency_comparison')
@@ -28,6 +29,8 @@ def generate_filter_query(filters):
                 else:
                     query += " AND frequency_in_noisy_place = ?"
                 values.append(value)
+        elif key == "sort":
+            sort_key = value
         elif key == 'age_comparison' or key == 'frequency_comparison':
             pass
         else:
@@ -36,7 +39,8 @@ def generate_filter_query(filters):
             else:
                 query += f" AND {key} = ?"
                 values.append(value)
-
+    if sort_key != '':
+        query += f" ORDER BY {sort_key}"
 
     print(values)
     print(query)
