@@ -1,3 +1,6 @@
+import datetime
+import time
+
 import telebot
 import sqlite3
 
@@ -24,10 +27,12 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS survey (
                     completed INTEGER DEFAULT 0
                 )''')
 cursor.execute('''CREATE TABLE IF NOT EXISTS noise_metering (
-    id INTEGER,
-    place TEXT,
-    noise TEXT
-)''')
+                    id	INTEGER,
+	                place	TEXT,
+	                noise	TEXT,
+	                date	TEXT,
+	                time	TEXT
+                )''')
 conn.commit()
 
 # Создаем объект бота
@@ -71,8 +76,8 @@ def ask_age(message):
 
     # Записываем данные в базу данных
     cursor.execute('''INSERT INTO survey 
-                    (id, age) 
-                    VALUES (?, ?)''', (chat_id, age))
+                    (id, age, date, time) 
+                    VALUES (?, ?)''', (chat_id, age, datetime.date.today(), datetime.time.now()))
     conn.commit()
 
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
@@ -155,8 +160,6 @@ def ask_frequency_in_noisy_place(message):
     bot.reply_to(message, "Оцените по 10-бальной шкале уровень шумового загрязнения в месте, где вы проживаете?", reply_markup=types.ReplyKeyboardRemove())
     bot.register_next_step_handler(message, ask_noise_rating)
 
-
-# Продолжайте добавлять обработчики для остальных вопросов в таком же формате
 
 # Определяем обработчик ответа на пятый вопрос
 def ask_noise_rating(message):
@@ -253,8 +256,8 @@ def noise_metering(message):
         place = geocode(message.text)
 
     cursor.execute('''INSERT INTO noise_metering 
-                        (id, place) 
-                        VALUES (?, ?)''', (chat_id, place))
+                        (id, place, date, time) 
+                        VALUES (?, ?, ?, ?)''', (chat_id, place, datetime.date.today(), ))
     conn.commit()
 
     bot.reply_to(message, "Замерьте шум и отправьте его среднее значение", reply_markup=types.ReplyKeyboardRemove())
@@ -264,4 +267,5 @@ def noise_metering_2(message):
     noise = message.text
 
     cursor.execute('''UPDATE noise_metering SET noise = ? WHERE id = ?''', (noise, message.chat.id))
+    conn.commit()
     bot.reply_to(message, "Спасибо за проведённые замеры!")

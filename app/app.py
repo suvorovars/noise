@@ -13,8 +13,8 @@ def home():
     print(app.root_path)
     return render_template('index.html')
 
-@app.route('/generate_json', methods=['GET'])
-def generate_json():
+@app.route('/api/generate_survey', methods=['GET'])
+def generate_survey():
     # Connect to the SQLite database
     conn = sqlite3.connect(database_path)  # Replace 'your_database.db' with your actual database file name
     cursor = conn.cursor()
@@ -25,14 +25,18 @@ def generate_json():
     filters['place'] = request.args.get('place')
     filters['mainNoise'] = request.args.get('main_noise')
     filters['frequency_in_noisy_place'] = request.args.get('frequency')
-    filters['frequency_comparison'] = request.args.get('frequency_comparison')
+    filters['frequency_in_noisy_place_comparison'] = request.args.get('frequency_comparison')
     filters['noise_rating'] = request.args.get('noise_rating')
+    filters['noise_rating_comparison'] = request.args.get('noise_rating_comparison')
     filters['noise_impact_rating'] = request.args.get('noise_impact_rating')
+    filters['noise_impact_rating_comparison'] = request.args.get('noise_impact_rating_comparison')
     filters['illness_from_noise'] = request.args.get('illness')
     filters['sleep_problem'] = request.args.get('sleep_problem')
     filters['noise_control_measures'] = request.args.get('noise_control')
+    filters['sort_key'] = request.args.get('sort_key')
 
-    query, values, key_sort = generate_filter_query(filters)
+
+    query, values = generate_filter_query(filters)
 
     cursor.execute(query, tuple(values))
 
