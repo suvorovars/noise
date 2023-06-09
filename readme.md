@@ -120,3 +120,4 @@ http://185.46.9.123/api/generate_survey?sort_key=age
 
 http://185.46.9.123/api/generate_survey?sort_key=noise_rating
 Вернёт ответы пользователей, отсортированные по оценке уровня шума.
+
