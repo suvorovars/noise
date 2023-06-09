@@ -60,13 +60,6 @@ def start_survey(message):
         bot.reply_to(message, "Отправьте своё местоположения", reply_markup=keyboard)
         bot.register_next_step_handler(message, noise_metering)
 
-@bot.message_handler(commands=['/noise'])
-def start_noise_metering(message):
-    keyboard = types.InlineKeyboardMarkup()
-    keyboard.add(types.KeyboardButton("Отправить своё местоположение", request_location=True))
-    bot.reply_to(message, "Отправьте своё местоположения", reply_markup=keyboard)
-    bot.register_next_step_handler(noise_metering)
-
 
 # Определяем обработчик ответа на первый вопрос
 def ask_age(message):
@@ -75,8 +68,8 @@ def ask_age(message):
 
     # Записываем данные в базу данных
     cursor.execute('''INSERT INTO survey 
-                    (id, age, date, time) 
-                    VALUES (?, ?)''', (chat_id, age, datetime.date.today(), datetime.time.now()))
+                    (id, age) 
+                    VALUES (?, ?)''', (chat_id, age))
     conn.commit()
 
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
