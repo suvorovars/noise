@@ -1,5 +1,4 @@
 import datetime
-import time
 
 import telebot
 import sqlite3
@@ -256,8 +255,8 @@ def noise_metering(message):
         place = geocode(message.text)
 
     cursor.execute('''INSERT INTO noise_metering 
-                        (id, place, date, time) 
-                        VALUES (?, ?, ?, ?)''', (chat_id, place, datetime.date.today(), ))
+                        (id, place) 
+                        VALUES (?, ?)''', (chat_id, place ))
     conn.commit()
 
     bot.reply_to(message, "Замерьте шум и отправьте его среднее значение", reply_markup=types.ReplyKeyboardRemove())
