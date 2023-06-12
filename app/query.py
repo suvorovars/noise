@@ -13,7 +13,7 @@ def generate_filter_query(filters):
             elif key == "sort_key":
                 sort_key = value
             else:
-                if filters[key + "_comparison"] is not None:
+                if filters.get(key + "_comparison") is not None:
                     if filters[key + "_comparison"] == 'less':
                         query += f" AND {key} < ?"
                     elif filters[key + "_comparison"] == 'greater':
