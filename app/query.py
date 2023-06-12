@@ -10,6 +10,8 @@ def generate_filter_query(filters):
                 lst_value = value.split(',')
                 query += f" AND {key} BETWEEN ? AND ?"
                 values += lst_value
+            elif key == "sort_key":
+                sort_key = value
             else:
                 if filters[key + "_comparison"] is not None:
                     if filters[key + "_comparison"] == 'less':
@@ -19,5 +21,7 @@ def generate_filter_query(filters):
                 else:
                     query += f" AND {key} = ?"
                 values.append(value)
+    if sort_key != '':
+        query += f" ORDER BY {sort_key}"
 
     return query, values
