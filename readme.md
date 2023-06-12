@@ -1,4 +1,4 @@
-# API
+# API для получения данных
 Для получения данных опроса, сделайте запрос по адресу /api/generate_survey
 
 #### ПРИМЕР:
@@ -121,3 +121,91 @@ http://185.46.9.123/api/generate_survey?sort_key=age
 http://185.46.9.123/api/generate_survey?sort_key=noise_rating
 Вернёт ответы пользователей, отсортированные по оценке уровня шума.
 
+## Полученный ответ
+В итоге вы увидите .json файл следущего вида:
+```
+[ {
+      "age":18,
+      "frequency_in_noisy_place":4,
+      "id":1491619914,
+      "illness_from_noise":"Головная боль",
+      "mainNoise":"Трасса",
+      "noise_control_measures":"Наушники",
+      "noise_impact_rating":8,
+      "noise_rating":8,
+      "place":"57.152985 65.541227",
+      "sleep_problem":1
+},
+{
+      "age":19,
+      "frequency_in_noisy_place":-1,
+      "id":871428143,
+      "illness_from_noise":"головная боль",
+      "mainNoise":"дороги",
+      "noise_control_measures":"никаких",
+      "noise_impact_rating":7,
+      "noise_rating":7,
+      "place":"57.126636 65.515787",
+      "sleep_problem":1
+},
+{
+      "age":17,
+      "frequency_in_noisy_place":5,
+      "id":1968149036,
+      "illness_from_noise":"Ничего из этого",
+      "mainNoise":"Трасса",
+      "noise_control_measures":"Ничего из этого",
+      "noise_impact_rating":0,
+      "noise_rating":8,
+      "place":"57.150191 65.591671",
+      "sleep_problem":1
+},
+{
+      "age":17,
+      "frequency_in_noisy_place":4,
+      "id":2106155418,
+      "illness_from_noise":"Головная боль",
+      "mainNoise":"Аэропорт/Железнодорожные пути",
+      "noise_control_measures":"Наушники",
+      "noise_impact_rating":7,
+      "noise_rating":8,
+      "place":"57.111859 65.523719",
+      "sleep_problem":1
+},
+{
+      "age":18,
+      "frequency_in_noisy_place":4,
+      "id":1290749687,
+      "illness_from_noise":"Головная боль",
+      "mainNoise":"Трасса",
+      "noise_control_measures":"Наушники",
+      "noise_impact_rating":4,
+      "noise_rating":5,
+      "place":"57.188304 65.571814",
+      "sleep_problem":0
+} ]
+```
+
+# API для загрузки картинок
+
+Вы можете использовать следующий код:
+
+```
+import requests
+
+url = 'http://185.46.9.123/api/upload'  # Замените адрес_сайта и порт на фактические значения
+
+file_path = "путь_к_изображению"
+
+sender_name = 'Имя отправителя'
+
+caption = 'Подпись к изображению'
+
+files = {'file': open(file_path, 'rb')}
+
+data = {'sender_name': sender_name, 'caption': caption}
+
+response = requests.post(url, files=files, data=data)
+
+print(response.text)
+```
