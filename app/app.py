@@ -7,16 +7,50 @@ from app.query import generate_filter_query
 
 app = Flask(__name__)
 database_path = os.path.join(app.root_path, 'db/main.db')
+
 @app.route('/')
-def home():
-    print("Home page")
-    print(app.root_path)
-    return render_template('index.html')
+def index():
+    db = sqlite3.connect(database_path, check_same_thread=False)
+    cursor = db.cursor()
+    cursor.execute(
+        'CREATE TABLE IF NOT EXISTS images (id INTEGER PRIMARY KEY AUTOINCREMENT, filename TEXT, sender_name TEXT, caption TEXT)')
+    db.commit()
+    cursor.execute('SELECT * FROM images')
+    images = cursor.fetchall()
+    return render_template('index.html', images=images)
+@app.route('/api')
+def api_page():
+    return render_template('api.html')
+
+@app.route('/api/upload', methods=['POST'])
+def upload():
+    db = sqlite3.connect(database_path, check_same_thread=False)
+    cursor = db.cursor()
+    cursor.execute(
+        'CREATE TABLE IF NOT EXISTS images (id INTEGER PRIMARY KEY AUTOINCREMENT, filename TEXT, sender_name TEXT, caption TEXT)')
+    db.commit()
+
+    print(request.view_args)
+    file = request.files['file']
+    sender_name = request.form['sender_name']
+    caption = request.form['caption']
+
+    if file:
+        filename = file.filename
+        file.save('app/static/uploaded_images/' + filename)
+
+        cursor.execute('INSERT INTO images (filename, sender_name, caption) VALUES (?, ?, ?)',
+                       (filename, sender_name, caption))
+        db.commit()
+
+        return 'File uploaded successfully!'
+    else:
+        return 'No file uploaded!'
 
 @app.route('/api/generate_survey', methods=['GET'])
 def generate_survey():
     # Connect to the SQLite database
-    conn = sqlite3.connect(database_path)  # Replace 'your_database.db' with your actual database file name
+    conn = sqlite3.connect(database_path)
     cursor = conn.cursor()
 
     filters = {}

@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Мой красивый сайт</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Uploaded Images</title>
+    <style>
+        .image-container {
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            width: 300px;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Сайт работает</h1>
-        <p>Добро пожаловать! Нажмите кнопку ниже, чтобы сгенерировать JSON.</p>
-        <a class="btn btn-primary" href="/api/generate_survey">Сгенерировать JSON</a>
-    </div>
+    <h1>Uploaded Images</h1>
+    {% for image in images %}
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='uploaded_images/' + image[1]) }}" alt="{{ image[1] }}">
+            <p>Sender: {{ image[2] }}</p>
+            <p>Caption: {{ image[3] }}</p>
+        </div>
+    {% endfor %}
 </body>
 </html>

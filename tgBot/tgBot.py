@@ -92,7 +92,6 @@ def ask_place(message):
     if message.location is not None:
         place = str(message.location.latitude) + ' ' + str(message.location.longitude)
     else:
-
         place = geocode(message.text)
 
         # Обновляем запись в базе данных
@@ -171,8 +170,8 @@ def ask_noise_rating(message):
 # Определяем обработчик ответа на шестой вопрос
 def ask_noise_impact_rating(message):
     impact_rating = message.text
-    if impact_rating.isdigit():
 
+    if impact_rating.isdigit():
         # Обновляем запись в базе данных
         cursor.execute('''UPDATE survey SET noise_impact_rating = ? WHERE id = ?''', (impact_rating, message.chat.id))
         conn.commit()
