@@ -1,14 +1,222 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Мой красивый сайт</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API для получения данных</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+    }
+
+    code {
+        font-family: "Hack";
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: #c8ffb0;
+    }
+
+    a {
+      color: #9affd2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 id="api-" class="mt-4">API для получения данных</h1>
+    <p>Для получения данных опроса, сделайте запрос по адресу /api/generate_survey</p>
+    <h4 id="-" class="mt-4">ПРИМЕР:</h4>
+    <p><a href="http://185.46.9.123/api/generate_survey">http://185.46.9.123/api/generate_survey</a></p>
+    <p>Вы можете передавать аргументы для фильтрации и сортировки данных</p>
+    <h2 id="-api" class="mt-4">Параметры в API</h2>
+    <
+
+
 </head>
 <body>
-    <div class="container">
-        <h1>Сайт работает</h1>
-        <p>Добро пожаловать! Нажмите кнопку ниже, чтобы сгенерировать JSON.</p>
-        <a class="btn btn-primary" href="/api/generate_survey">Сгенерировать JSON</a>
-    </div>
-</body>
-</html>
+<h1 id="api-">API для получения данных</h1>
+<p>Для получения данных опроса, сделайте запрос по адресу /api/generate_survey</p>
+<h4 id="-">ПРИМЕР:</h4>
+<p><a href="http://185.46.9.123/api/generate_survey">http://185.46.9.123/api/generate_survey</a></p>
+<p>Вы можете передавать аргументы для фильтрации и сортировки данных</p>
+<h2 id="-api">Параметры в API</h2>
+<p><a href="http://185.46.9.123/api/generate_survey">http://185.46.9.123/api/generate_survey</a></p>
+<ul>
+<li>?age=[\<int> / \<int>, \<int>]</li>
+<li>&amp;age_comparison=\<string></li>
+<li>&amp;place=\<int> \<int></li>
+<li>&amp;main_noise=\<string></li>
+<li>&amp;frequency_in_noisy_place=[\<int> / \<int>, \<int>]</li>
+<li>&amp;frequency_in_noisy_place_comparison=\<string></li>
+<li>&amp;noise_rating=[\<int> / \<int>, \<int>]</li>
+<li>&amp;noise_rating_comparison=\<string></li>
+<li>&amp;noise_impact_rating=[\<int> / \<int>, \<int>]</li>
+<li>&amp;noise_impact_rating_comparison=\<string></li>
+<li>&amp;illness_from_noise=\<string></li>
+<li>&amp;sleep_problem=\<int> </li>
+<li>&amp;noise_control_measures=\<string></li>
+<li>&amp;sort_key=\<string></li>
+</ul>
+<h3 id="age">age</h3>
+<p>параметр, отвечающий за фильтрацию пользователей по возрасту. Введите одно число, чтобы вывести ответы людей определённого возраста, или передайте 2 числа через запятую, чтобы получить ответы с возрастом в промежутке между этими числами. Используйте ключ <strong>age_comparison</strong> со значениями &quot;less&quot; или &quot;greater&quot;, чтобы искать значения возраста меньше или больше числа, переданного в <strong>age</strong>.</p>
+<h4 id="-">Пример:</h4>
+<p><a href="http://185.46.9.123/api/generate_survey?age=18&amp;age_comparison=less">http://185.46.9.123/api/generate_survey?age=18&amp;age_comparison=less</a>
+Вернёт ответы пользователей младше 18 лет.</p>
+<p><a href="http://185.46.9.123/api/generate_survey?age=17,19">http://185.46.9.123/api/generate_survey?age=17,19</a>
+Вернёт ответы пользователей в возрасте от 17 до 19 лет.</p>
+<p><a href="http://185.46.9.123/api/generate_survey?age=18">http://185.46.9.123/api/generate_survey?age=18</a>
+Вернёт пользователей возрастом 18 лет.</p>
+<h3 id="place">place</h3>
+<p>параметр, отвечающий за выбор места. Принимает на вход координаты через пробел.</p>
+<h4 id="-">Пример</h4>
+<p><a href="http://185.46.9.123/api/generate_survey?place=57.158337+65.526149">http://185.46.9.123/api/generate_survey?place=57.158337+65.526149</a>
+Вернёт всех пользователей, указавших данные координаты.</p>
+<h3 id="main_noise">main_noise</h3>
+<p>параметр, который позволяет фильтровать данные по основным источникам шума.</p>
+<h4 id="-">Пример</h4>
+<p><a href="http://185.46.9.123/api/generate_survey?main_noise=дорога">http://185.46.9.123/api/generate_survey?main_noise=дорога</a>
+Вернёт ответы всех пользователей, у которых основным источником шума является дорога.</p>
+<h3 id="frequency_in_noisy_place">frequency_in_noisy_place</h3>
+<p>параметр, позволяющий фильтровать данные по частоте прибывания в шумных местах. Можно передать одно число, чтобы получить
+ответы с указанной частотой прибывания, или передать 2 числа через запятую, чтобы получить ответы с частотой в указанном
+диапазоне. Используйте ключ <strong>frequency_in_noisy_place_comparison</strong> со значениями &quot;less&quot; или &quot;greater&quot;,
+чтобы искать значения частоты меньше или больше числа, переданного в <strong>frequency_in_noisy_place</strong>.</p>
+<h4 id="-">Пример:</h4>
+<p><a href="http://185.46.9.123/api/generate_survey?frequency_in_noisy_place=5&amp;frequency_in_noisy_place_comparison=greater">http://185.46.9.123/api/generate_survey?frequency_in_noisy_place=5&amp;frequency_in_noisy_place_comparison=greater</a>
+Вернёт ответы пользователей, у которых частота пребывания в шумном месте соотвествует числу 5.</p>
+<p><a href="http://185.46.9.123/api/generate_survey?frequency_in_noisy_place=2,4">http://185.46.9.123/api/generate_survey?frequency_in_noisy_place=2,4</a>
+Вернёт ответы пользователей, у которых частота пребывания в шумных местах соотвествует числам от 2 до 4.</p>
+<h3 id="noise_rating">noise_rating</h3>
+<p>параметр, позволяющий фильтровать данные по оценке уровня шума. Можно передать одно число, чтобы получить ответы
+с указанной оценкой, или передать 2 числа через запятую, чтобы получить ответы с оценкой шума в указанном диапазоне.
+Используйте ключ <strong>noise_rating_comparison</strong> со значениями &quot;less&quot; или &quot;greater&quot;, чтобы искать значения оценки шума
+меньше или больше числа, переданного в <strong>noise_rating</strong>.</p>
+<h4 id="-">Пример:</h4>
+<p><a href="http://185.46.9.123/api/generate_survey?noise_rating=7&amp;noise_rating_comparison=greater">http://185.46.9.123/api/generate_survey?noise_rating=7&amp;noise_rating_comparison=greater</a>
+Вернёт ответы пользователей, у которых оценка уровня шума больше 7.</p>
+<p><a href="http://185.46.9.123/api/generate_survey?noise_rating=5,8&amp;noise_rating_comparison=less">http://185.46.9.123/api/generate_survey?noise_rating=5,8&amp;noise_rating_comparison=less</a>
+Вернёт ответы пользователей, у которых оценка уровня шума находится в диапазоне от 5 до 8.</p>
+<h3 id="noise_impact_rating">noise_impact_rating</h3>
+<p>параметр, позволяющий фильтровать данные по оценке воздействия шума. Можно передать одно число, чтобы получить ответы с
+указанной оценкой, или передать 2 числа через запятую, чтобы получить ответы с оценкой воздействия шума в указанном
+диапазоне. Используйте ключ <strong>noise_impact_rating_comparison</strong> со значениями &quot;less&quot; или &quot;greater&quot;, чтобы искать
+значения оценки воздействия шума меньше или больше числа, переданного в <strong>noise_impact_rating</strong>.</p>
+<h4 id="-">Пример:</h4>
+<p><a href="http://185.46.9.123/api/generate_survey?noise_impact_rating=6&amp;noise_impact_rating_comparison=greater">http://185.46.9.123/api/generate_survey?noise_impact_rating=6&amp;noise_impact_rating_comparison=greater</a>
+Вернёт ответы пользователей, у которых оценка воздействия шума больше 6.</p>
+<p><a href="http://185.46.9.123/api/generate_survey?noise_impact_rating=4,7">http://185.46.9.123/api/generate_survey?noise_impact_rating=4,7</a>
+Вернёт ответы пользователей, у которых оценка воздействия шума находится в диапазоне от 4 до 7.</p>
+<h3 id="illness_from_noise">illness_from_noise</h3>
+<p>параметр, позволяющий фильтровать данные по наличию заболеваний, связанных со шумом.</p>
+<h4 id="-">Пример:</h4>
+<p><a href="http://185.46.9.123/api/generate_survey?illness_from_noise=головная+боль">http://185.46.9.123/api/generate_survey?illness_from_noise=головная+боль</a>
+Вернёт ответы пользователей, у которых болит голова из-за шума.</p>
+<h3 id="sleep_problem">sleep_problem</h3>
+<p>параметр, позволяющий фильтровать данные по наличию проблем со сном. Можно передать число 0 или 1</p>
+<h4 id="-">Пример:</h4>
+<p><a href="http://185.46.9.123/api/generate_survey?sleep_problem=1">http://185.46.9.123/api/generate_survey?sleep_problem=1</a>
+Вернёт ответы пользователей, у которых есть проблемы со сном</p>
+<h3 id="noise_control_measures">noise_control_measures</h3>
+<p>параметр, позволяющий фильтровать данные по принятым мерам по контролю над шумом. Можно передать строковое значение
+для поиска ответов пользователей, которые приняли указанные меры.</p>
+<h4 id="-">Пример:</h4>
+<p><a href="http://185.46.9.123/api/generate_survey?noise_control_measures=шумопоглощающие+материалы">http://185.46.9.123/api/generate_survey?noise_control_measures=шумопоглощающие+материалы</a>
+Вернёт ответы пользователей, которые приняли меры по использованию шумопоглощающих материалов.</p>
+<h3 id="sort_key">sort_key</h3>
+<p>параметр, позволяющий сортировать данные по указанному ключу. Можно передать строковое значение, чтобы отсортировать данные по определенному полю.</p>
+<h4 id="-">Пример:</h4>
+<p><a href="http://185.46.9.123/api/generate_survey?sort_key=age">http://185.46.9.123/api/generate_survey?sort_key=age</a>
+Вернёт ответы пользователей, отсортированные по возрасту.</p>
+<p><a href="http://185.46.9.123/api/generate_survey?sort_key=noise_rating">http://185.46.9.123/api/generate_survey?sort_key=noise_rating</a>
+Вернёт ответы пользователей, отсортированные по оценке уровня шума.</p>
+<h2 id="-">Полученный ответ</h2>
+<p>В итоге вы увидите .json файл следущего вида:</p>
+<pre><code>[ {
+      <span class="hljs-attr">"age"</span>:<span class="hljs-number">18</span>,
+      <span class="hljs-attr">"frequency_in_noisy_place"</span>:<span class="hljs-number">4</span>,
+      <span class="hljs-attr">"id"</span>:<span class="hljs-number">1491619914</span>,
+      <span class="hljs-attr">"illness_from_noise"</span>:<span class="hljs-string">"Головная боль"</span>,
+      <span class="hljs-attr">"mainNoise"</span>:<span class="hljs-string">"Трасса"</span>,
+      <span class="hljs-attr">"noise_control_measures"</span>:<span class="hljs-string">"Наушники"</span>,
+      <span class="hljs-attr">"noise_impact_rating"</span>:<span class="hljs-number">8</span>,
+      <span class="hljs-attr">"noise_rating"</span>:<span class="hljs-number">8</span>,
+      <span class="hljs-attr">"place"</span>:<span class="hljs-string">"57.152985 65.541227"</span>,
+      <span class="hljs-attr">"sleep_problem"</span>:<span class="hljs-number">1</span>
+},
+{
+      <span class="hljs-attr">"age"</span>:<span class="hljs-number">19</span>,
+      <span class="hljs-attr">"frequency_in_noisy_place"</span>:<span class="hljs-number">-1</span>,
+      <span class="hljs-attr">"id"</span>:<span class="hljs-number">871428143</span>,
+      <span class="hljs-attr">"illness_from_noise"</span>:<span class="hljs-string">"головная боль"</span>,
+      <span class="hljs-attr">"mainNoise"</span>:<span class="hljs-string">"дороги"</span>,
+      <span class="hljs-attr">"noise_control_measures"</span>:<span class="hljs-string">"никаких"</span>,
+      <span class="hljs-attr">"noise_impact_rating"</span>:<span class="hljs-number">7</span>,
+      <span class="hljs-attr">"noise_rating"</span>:<span class="hljs-number">7</span>,
+      <span class="hljs-attr">"place"</span>:<span class="hljs-string">"57.126636 65.515787"</span>,
+      <span class="hljs-attr">"sleep_problem"</span>:<span class="hljs-number">1</span>
+},
+{
+      <span class="hljs-attr">"age"</span>:<span class="hljs-number">17</span>,
+      <span class="hljs-attr">"frequency_in_noisy_place"</span>:<span class="hljs-number">5</span>,
+      <span class="hljs-attr">"id"</span>:<span class="hljs-number">1968149036</span>,
+      <span class="hljs-attr">"illness_from_noise"</span>:<span class="hljs-string">"Ничего из этого"</span>,
+      <span class="hljs-attr">"mainNoise"</span>:<span class="hljs-string">"Трасса"</span>,
+      <span class="hljs-attr">"noise_control_measures"</span>:<span class="hljs-string">"Ничего из этого"</span>,
+      <span class="hljs-attr">"noise_impact_rating"</span>:<span class="hljs-number">0</span>,
+      <span class="hljs-attr">"noise_rating"</span>:<span class="hljs-number">8</span>,
+      <span class="hljs-attr">"place"</span>:<span class="hljs-string">"57.150191 65.591671"</span>,
+      <span class="hljs-attr">"sleep_problem"</span>:<span class="hljs-number">1</span>
+},
+{
+      <span class="hljs-attr">"age"</span>:<span class="hljs-number">17</span>,
+      <span class="hljs-attr">"frequency_in_noisy_place"</span>:<span class="hljs-number">4</span>,
+      <span class="hljs-attr">"id"</span>:<span class="hljs-number">2106155418</span>,
+      <span class="hljs-attr">"illness_from_noise"</span>:<span class="hljs-string">"Головная боль"</span>,
+      <span class="hljs-attr">"mainNoise"</span>:<span class="hljs-string">"Аэропорт/Железнодорожные пути"</span>,
+      <span class="hljs-attr">"noise_control_measures"</span>:<span class="hljs-string">"Наушники"</span>,
+      <span class="hljs-attr">"noise_impact_rating"</span>:<span class="hljs-number">7</span>,
+      <span class="hljs-attr">"noise_rating"</span>:<span class="hljs-number">8</span>,
+      <span class="hljs-attr">"place"</span>:<span class="hljs-string">"57.111859 65.523719"</span>,
+      <span class="hljs-attr">"sleep_problem"</span>:<span class="hljs-number">1</span>
+},
+{
+      <span class="hljs-attr">"age"</span>:<span class="hljs-number">18</span>,
+      <span class="hljs-attr">"frequency_in_noisy_place"</span>:<span class="hljs-number">4</span>,
+      <span class="hljs-attr">"id"</span>:<span class="hljs-number">1290749687</span>,
+      <span class="hljs-attr">"illness_from_noise"</span>:<span class="hljs-string">"Головная боль"</span>,
+      <span class="hljs-attr">"mainNoise"</span>:<span class="hljs-string">"Трасса"</span>,
+      <span class="hljs-attr">"noise_control_measures"</span>:<span class="hljs-string">"Наушники"</span>,
+      <span class="hljs-attr">"noise_impact_rating"</span>:<span class="hljs-number">4</span>,
+      <span class="hljs-attr">"noise_rating"</span>:<span class="hljs-number">5</span>,
+      <span class="hljs-attr">"place"</span>:<span class="hljs-string">"57.188304 65.571814"</span>,
+      <span class="hljs-attr">"sleep_problem"</span>:<span class="hljs-number">0</span>
+} ]
+</code></pre><h1 id="api-">API для загрузки картинок</h1>
+<p>Вы можете использовать следующий код:</p>
+<pre><code><span class="hljs-keyword">import</span> requests
+
+url = <span class="hljs-string">'http://185.46.9.123/api/upload'</span>  # Замените адрес_сайта и порт на фактические значения
+
+file_path = <span class="hljs-string">"путь_к_изображению"</span>
+
+sender_name = <span class="hljs-string">'Имя отправителя'</span>
+
+caption = <span class="hljs-string">'Подпись к изображению'</span>
+
+files = {<span class="hljs-string">'file'</span>: open(file_path, <span class="hljs-string">'rb'</span>)}
+
+<span class="hljs-keyword">data</span> = {<span class="hljs-string">'sender_name'</span>: sender_name, <span class="hljs-string">'caption'</span>: caption}
+
+response = requests.post(url, files=files, <span class="hljs-keyword">data</span>=<span class="hljs-keyword">data</span>)
+
+print(response.<span class="hljs-keyword">text</span>)
+</code></pre>
+</body></html>
